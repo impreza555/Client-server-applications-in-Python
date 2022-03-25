@@ -25,9 +25,9 @@ class Encoder:
 class Message:
     @staticmethod
     def get(client):
-        response = client.recv(MAX_PACKAGE_LENGTH)
-        encoded_response = Encoder.decoding(response)
-        return encoded_response
+        encoded_response = client.recv(MAX_PACKAGE_LENGTH)
+        response = Encoder.decoding(encoded_response)
+        return response
 
     @staticmethod
     def send(sock, message):

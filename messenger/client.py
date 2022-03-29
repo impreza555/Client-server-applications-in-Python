@@ -8,11 +8,13 @@ from sys import argv
 from common.settings import ACTION, PRESENCE, TIME, USER, ACCOUNT_NAME, RESPONSE, ERROR, DEFAULT_IP_ADDRESS, \
     DEFAULT_PORT
 from common.utilites import Message
+from common.decorators import loger, log
 
 
 CLIENT_LOGGER = logging.getLogger('client')
 
 
+@loger(log)
 class Client:
     def presence(self, account_name='Guest'):
         out = {
@@ -33,7 +35,6 @@ class Client:
             return f'Ошибка соединения с сервером: {message[ERROR]}'
         CLIENT_LOGGER.error('Неверный формат сообщения от сервера')
         raise ValueError
-
 
     def start(self, account_name='Guest'):
         try:

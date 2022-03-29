@@ -6,11 +6,13 @@ from log import server_log_config
 
 from common.settings import ACTION, RESPONSE, MAX_CONNECTIONS, PRESENCE, TIME, USER, ACCOUNT_NAME, ERROR, DEFAULT_PORT
 from common.utilites import Message
+from common.decorators import loger, log
 
 
 SERVER_LOGGER = logging.getLogger('server')
 
 
+@loger(log)
 class Server:
     def process(self, message):
         SERVER_LOGGER.debug(f'Разбор сообщения {message} от клиента')

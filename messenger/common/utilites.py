@@ -24,12 +24,12 @@ class Encoder:
 
 class Message:
     @staticmethod
-    def get(client):
+    def getting(client):
         encoded_response = client.recv(MAX_PACKAGE_LENGTH)
         response = Encoder.decoding(encoded_response)
         return response
 
     @staticmethod
-    def send(sock, message):
+    def sending(sock, message):
         encoded_message = Encoder.encoding(message)
         sock.send(encoded_message)

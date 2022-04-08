@@ -1,35 +1,31 @@
 from subprocess import Popen, CREATE_NEW_CONSOLE
-import logging
+
 from log import client_log_config
 
-
-LOGGER = logging.getLogger('client')
+LOGGER = client_log_config.LOGGER
 process_list = []
 
 
 def launch():
+    help = f'Выберете действие:\n' \
+           f'{"-" * 25}\nЗапустить сервер и клиентов - (s),\n' \
+           f'Закрыть клиентов - (x),\nВыйти - (q): '
     while True:
-        ACTION = input(f'Выберете действие:\n{"-" * 25}\n'
-                       f'Запустить клиентов - (s),\n'
-                       f'Закрыть клиентов - (x),\n'
-                       f'Выйти - (q): ')
+        ACTION = input(help).lower()
         if ACTION == 'q':
             break
         elif ACTION == 's':
             process_list.append(Popen('python server.py', creationflags=CREATE_NEW_CONSOLE))
-            l_number = int(input('Введите количество клиентов, которе нужно запустить на прослушивание: '))
-            s_number = int(input('Введите количество клиентов, которе нужно запустить на отправку: '))
-            for _ in range(l_number):
-                process_list.append(Popen('python client.py -m listen', creationflags=CREATE_NEW_CONSOLE))
-                LOGGER.debug(f'Запущено {l_number} клиентов на прослушивание:')
-            for _ in range(s_number):
-                process_list.append(Popen('python client.py -m send', creationflags=CREATE_NEW_CONSOLE))
-                LOGGER.debug(f'Запущено {s_number} клиентов на отправку')
-
+            number = int(input('Введите количество клиентов, которе нужно запустить: '))
+            for _ in range(number):
+                process_list.append(Popen(f'python client.py -n Test{_ + 1}', creationflags=CREATE_NEW_CONSOLE))
+            LOGGER.debug(f'Запущено {number} клиентов:')
         elif ACTION == 'x':
             for process in process_list:
                 process.kill()
             process_list.clear()
+        else:
+            print('Неизвестная команда')
 
 
 if __name__ == "__main__":

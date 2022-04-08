@@ -1,7 +1,7 @@
 """Здесь производятся настройки приложения"""
 import logging
 
-# Порт по умолчанию для сетевого ваимодействия
+# Порт по умолчанию для сетевого взаимодействия
 DEFAULT_PORT = 7777
 
 # IP адрес по умолчанию для подключения клиента
@@ -19,15 +19,17 @@ ENCODING = 'utf-8'
 # Текущий уровень логирования
 LOGGING_LEVEL = logging.DEBUG
 
-# Прококол JIM основные ключи:
+# Протокол JIM основные ключи:
 ACTION = 'action'
 TIME = 'time'
 ACCOUNT_NAME = 'account_name'
-SENDER = 'sender'
+SENDER = 'from'
+DESTINATION = 'to'
 
 # Прочие ключи, используемые в протоколе
 PRESENCE = 'presence'
+MESSAGE = 'message'
+EXIT = 'exit'
+MESSAGE_TEXT = 'message_text'
 RESPONSE = 'response'
 ERROR = 'error'
-MESSAGE = 'message'
-MESSAGE_TEXT = 'message_text'
